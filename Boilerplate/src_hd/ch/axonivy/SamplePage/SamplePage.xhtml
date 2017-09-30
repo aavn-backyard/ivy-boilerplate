@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:ic="http://ivyteam.ch/jsf/component"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:button="http://java.sun.com/jsf/composite/component/button"
+	xmlns:datatable="http://java.sun.com/jsf/composite/component/datatable">
+<h:body>
+	<ui:composition template="/layouts/basic.xhtml">
+		<ui:define name="title">SamplePage</ui:define>
+		<ui:define name="content">
+			<div class="sample-page">
+				<div class="ui-grid-row">
+					<p:outputPanel styleClass="ui-grid-col-8" id="customerTablePanel">
+
+						<datatable:CustomTable bean="#{data.bean.customers}"
+							selection="#{data.bean.customers.selectedCustomer}"
+							id="customerTable" widgetVar="customerTable" 
+							 rowKey="customerId">
+							
+							<p:ajax event="rowSelect" listener="#{data.bean.onSelectCustomer}" update="customerDetail" />
+							
+							<p:column styleClass="text-left" width="10%" sortBy="#{row.name}" headerText="Name">
+								<h:outputText value="#{row.name}" />
+							</p:column>
+
+							<p:column styleClass="text-left" width="10%" sortBy="#{row.gender.name()}"  headerText="Gender">
+								<h:outputText value="#{row.gender.name()}" />
+							</p:column>
+
+						</datatable:CustomTable>
+
+					</p:outputPanel>
+					<div class="ui-grid-col-4">
+						<h:form id="customerDetail">
+							<div class="application-background-color padding-left-10">
+								<div>
+									<p:outputLabel value="Id: " styleClass="ui-grid-col-3" for="customerId"/>
+									<p:inputText id="customerId" value="#{data.bean.customerInfo.selectedModel.customerId}" styleClass="ui-grid-col-9" readonly="true" />
+								</div>
+								<div>
+									<p:outputLabel value="Name : " styleClass="ui-grid-col-3" for="customerName"/>
+									<p:inputText id="customerName" value="#{data.bean.customerInfo.selectedModel.customerId}" styleClass="ui-grid-col-9" />
+								</div>
+								<div>
+									<p:outputLabel value="Gender : " styleClass="ui-grid-col-3" />
+									<p:selectOneRadio id="gender" value="#{data.bean.customerInfo.selectedModel.gender}">
+							            <f:selectItems value="#{data.bean.customerInfo.genders}" var="gender" itemLabel="#{gender.name()}" itemValue="#{gender}" />
+							        </p:selectOneRadio>
+								</div>
+							</div>
+							<div class="float-right buttons-area">
+								<button:CustomButton id="submitBtn" value="Submit">
+									<f:ajax event="click" listener="#{data.bean.submit()}" render="customerTablePanel"></f:ajax>
+								</button:CustomButton>
+							</div>
+
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

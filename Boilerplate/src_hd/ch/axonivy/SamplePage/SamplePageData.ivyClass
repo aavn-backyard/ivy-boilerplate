@@ -1,0 +1,4 @@
+SamplePageData #class
+ch.axonivy.SamplePage #namespace
+bean ch.axonivy.web.application.page.samplepage.SamplePageBean #field
+bean PERSISTENT #fieldModifier

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+<composite:interface>
+	<composite:attribute name="id" required="true" />
+	<composite:attribute name="value"></composite:attribute>
+	
+	<composite:clientBehavior name="click" targets="#{cc.attrs.id}" event="click" />
+</composite:interface>
+
+<composite:implementation>
+	<div class="custombutton-component" data-component-clientId="#{cc.clientId}" data-component-id="#{cc.clientId}:#{cc.attrs.id}">
+		<h:commandButton id="#{cc.attrs.id}" value="#{cc.attrs.value}"/>
+		<script>
+			(function($, undefined) {
+				$(function() {
+					IvyBoilerPlate.component.button.CustomButton.loadById("#{cc.clientId}:#{cc.attrs.id}");
+				});
+			})(jQuery);
+		</script>
+	</div>
+</composite:implementation>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+<composite:interface>
+	<composite:attribute name="id" required="true" />
+	<composite:attribute name="widgetVar" />
+	<composite:attribute name="bean"
+		type="ch.axonivy.web.application.component.datatable.DataTableController"
+		required="true" />
+	<composite:attribute name="rowKey" type="java.lang.String" required="true" />
+
+	<composite:attribute name="draggableColumns" default="true" />
+	<composite:attribute name="resizableColumns" default="true" />
+
+
+	<!-- For paginator -->
+	<composite:attribute name="rows" default="10" />
+	<composite:attribute name="rowStyleClass" />
+	<composite:attribute name="currentPageReportTemplate"
+		default="{totalRecords} - {currentPage}/{totalPages}" />
+	<composite:attribute name="paginator" default="true" />
+
+	<composite:attribute name="selection" required="true" />
+	<composite:attribute name="selectionMode" default="single" />
+
+
+	<!-- Event emiter -->
+	<composite:clientBehavior name="rowDblselect" targets="#{cc.attrs.id}"
+		event="rowDblselect" />
+	<composite:clientBehavior name="rowSelect" targets="#{cc.attrs.id}"
+		event="rowSelect" />
+	<composite:clientBehavior name="rowUnselect" targets="#{cc.attrs.id}"
+		event="rowUnselect" />
+
+</composite:interface>
+
+<composite:implementation>
+	<div class="datatable-component" 
+		data-component-widgetVar="#{cc.attrs.widgetVar}"
+		data-component-clientId="#{cc.clientId}"
+		data-component-id="#{cc.clientId}:#{cc.attrs.id}">
+
+		<p:dataTable var="row" id="#{cc.attrs.id}" scrollable="true"
+			filteredValue="#{cc.attrs.bean.filteredModels}"
+			draggableColumns="#{cc.attrs.draggableColumns}"
+			currentPageReportTemplate="#{cc.attrs.currentPageReportTemplate}"
+			value="#{cc.attrs.bean.resources}" rows="#{cc.attrs.rows}"
+			resizableColumns="#{cc.attrs.resizableColumns}"
+			rowStyleClass="#{cc.attrs.rowStyleClass}" rowIndexVar="rIdx"
+			widgetVar="#{cc.attrs.widgetVar}" paginator="#{cc.attrs.paginator}"
+			paginatorPosition="bottom" rowKey="#{row[cc.attrs.rowKey]}"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15, 999999" selection="#{cc.attrs.selection}"
+			selectionMode="#{cc.attrs.selectionMode}">
+
+			<composite:insertChildren />
+
+		</p:dataTable>
+		<script>
+			(function($, undefined) {
+				$(function() {
+					IvyBoilerPlate.component.datatable.CustomTable.loadById("#{cc.clientId}:#{cc.attrs.id}");
+				});
+			})(jQuery);
+		</script>
+	</div>
+</composite:implementation>
+
+</html>

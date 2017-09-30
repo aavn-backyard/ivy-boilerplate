@@ -1,0 +1,21 @@
+# Java template
+*.class
+
+# Css files
+*.css
+
+# Package Files #
+*.war
+*.ear
+*.iar
+*.jar
+
+# Generated folder
+.metadata/
+Boilerplate/.sass-cache/
+Boilerplate/node/
+Boilerplate/node_modules/
+Boilerplate/target/
+Boilerplate/src_dataClasses/
+Boilerplate/classes/
+Boilerplate/webContent/resources/gen-build

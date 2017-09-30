@@ -1,0 +1,21 @@
+.custombutton-component{
+	input {
+	    border-radius: 25%;
+	    background-color: #F2F2F2;
+	    border: none;
+	    padding: 15px 15px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    cursor: pointer;
+	    outline:none;
+	    
+	    &:hover {
+    	    filter: brightness(80%);
+	    }
+	    &:active {
+    	    filter: brightness(100%);
+	    }
+	}
+  	display: inline-block;
+}

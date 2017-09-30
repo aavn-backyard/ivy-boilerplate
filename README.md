@@ -1,3 +1,4 @@
+[ SlideSheet  ] (https://goo.gl/Pcjb3B)
 ## Reduce Ivy's achilles heels 
  * **Ivy has values**
 	* It has libraries (UserControl, TaskManagement, BusinessDataRepo, CMS, IRestClient,... ). And they're very useful.

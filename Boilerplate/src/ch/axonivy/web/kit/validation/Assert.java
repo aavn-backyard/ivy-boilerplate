@@ -3,8 +3,6 @@ package ch.axonivy.web.kit.validation;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-import org.apache.poi.ss.formula.functions.T;
-
 import ch.axonivy.web.application.page.samplepage.model.CustomerModel;
 
 
